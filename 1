@@ -1,0 +1,39 @@
+from library import loadList
+# page_id,name,urlslug,ID,ALIGN,EYE,HAIR,SEX,GSM,ALIVE,APPEARANCES,FIRST APPEARANCE,YEAR
+
+dataDC = loadList("dc-wikia-data.csv")
+dataMarvel = loadList("marvel-wikia-data.csv")
+col = {
+    "name": 1, 
+    "identity": 3, 
+    "align": 4,
+    "gender": 7, 
+    "alive": 9,
+    "first apperance": 12
+}
+
+listOfGoodFemale = []
+
+def check(universe, dataSet, list): 
+    for n in range(0, len(dataDC)): 
+        if dataDC[n][col["gender"]] == "Female Characters" and dataDC[n][col["alive"]] == "Living Characters" and dataDC[n][col["align"]] == "Good Characters":
+            list += [[dataDC[n][col["name"]], dataDC[n][col["identity"]], universe]]
+
+check("DC", dataDC, listOfGoodFemale)
+check("Marvel", dataMarvel, listOfGoodFemale)
+ 
+for n in listOfGoodFemale: 
+    print(n)
+
+
+
+
+
+
+
+
+
+
+
+
+
