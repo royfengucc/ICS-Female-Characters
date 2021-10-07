@@ -1,0 +1,27 @@
+# player: 
+# PlayerId,NameFirst,NameLast,CurrentHandle,CountryCode,TotalUSDPrize,Game,Genre
+# country: 
+# Continent_Name,Continent_Code,Country_Name,Two_Letter_Country_Code,Three_Letter_Country_Code,Country_Number
+
+from library import loadList
+
+dataPlayer = loadList("playerinfo.csv")
+dataCountry = loadList("countryInfo.csv")
+earningsData = []
+
+for n in range(0, len(dataCountry)): 
+    totalEarnings = 0
+    playerCount = 0
+    countryCode = dataCountry[n][3].lower()
+    for p in range(0, len(dataPlayer)): 
+        if dataPlayer[p][4] == countryCode:
+            playerEarnings = dataPlayer[n][5]
+            totalEarnings += float(playerEarnings)
+            playerCount += 1
+    if playerCount > 0: 
+        countryAverage = totalEarnings / playerCount
+        earningsData += [[dataCountry[n][2], totalEarnings, playerCount, countryAverage]]
+
+for n in earningsData: 
+    print(n)
+
