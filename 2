@@ -1,0 +1,31 @@
+from library import loadList
+
+import math
+
+data = loadList("all_seasons.csv")
+
+fromUsa = 0
+tallPeopleFromUsa = 0
+
+fromForeign = 0
+tallPeopleFromForeign = 0
+
+for n in range(0, len(data)): 
+    if data[n][7] == "USA": 
+        fromUsa += 1
+        if float(data[n][4]) >= 213.0: 
+            tallPeopleFromUsa += 1
+    else: 
+        fromForeign += 1
+        if float(data[n][4]) >= 213.0: 
+            tallPeopleFromForeign += 1
+
+tallUsaPercent = tallPeopleFromUsa/fromUsa
+tallForeignPercent = tallPeopleFromForeign/fromForeign
+
+print("Percent of tall USA people: {}{}".format("%", round(tallUsaPercent, 2) * 100))
+print("Percent of tall foreign people: {}{}".format("%", round(tallForeignPercent, 3) * 100))
+if tallForeignPercent > tallUsaPercent: 
+    print("There is a larger percentage of tall people from foreign countries compared to USA")
+else: 
+    print("There is a larger percentage of tall people from USA compared to foreign countries")
