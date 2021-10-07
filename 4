@@ -1,0 +1,28 @@
+from library import loadList
+import statistics
+
+col = {
+    "name": 1, 
+    "fgm": 5, 
+    "fga": 4, 
+}
+
+data = loadList("nba-players.csv")
+total = 0
+counter = 0
+playerList = []
+
+
+for n in range(0, len(data)): 
+    total += 1
+    if float(data[n][col["fgm"]]) >= 3: 
+        message = "Above Average"
+        counter += 1
+    else: 
+        message = "Below Average"
+        playerList.append([[data[n][col["name"]], data[n][col["fgm"]], message]])
+
+for n in playerList: 
+    print(n)
+print("Total above average: ", counter)
+print("Percent above average: ", (total/counter)*10)
